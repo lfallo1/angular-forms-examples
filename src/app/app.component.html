@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" name="username" ngModel required>
+          </div>
+          <button class="btn btn-default" type="button" (click)="suggestUserName()">Suggest an Username</button>
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <input type="email" id="email" class="form-control" name="email" ngModel required email #email="ngModel">
+            <span class="help-text text-danger" *ngIf="email.invalid && email.touched">*Please enter a valid email</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="secret">Secret Questions</label>
+          <select id="secret" class="form-control" name="secret" [ngModel]="'pet'" required>
+            <option value="pet">Your first Pet?</option>
+            <option value="teacher">Your first teacher?</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="about">About</label>
+          <textarea name="about" id="about" rows="3" [(ngModel)]="about" class="form-control" required></textarea>
+          <p>About: {{about}}</p>
+        </div>
+        <div class="radio" *ngFor="let gender of genders">
+          <label for="gender">
+            <input type="radio" id="gender" name="gender" [ngModel]="genders[0]" [value]="gender" required/>
+            {{ gender }}
+          </label>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
+          <button class="btn btn-danger" (click)="form.reset()">Reset Form</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
